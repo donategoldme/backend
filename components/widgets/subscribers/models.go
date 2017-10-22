@@ -1,0 +1,5 @@
+package subscribers
+
+import (
+	"package"
+)

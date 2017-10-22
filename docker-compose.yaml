@@ -1,0 +1,48 @@
+version: '2'
+services:
+  backend:
+    restart: always
+    build: .
+    depends_on:
+      - "postgres"
+      - "tarantool"
+      - "centrifugo"
+    env_file: env
+    volumes:
+      - uploads:/var/uploads/
+
+  nginx:
+    restart: always
+    build: ./confs/nginx/
+    ports:
+      - "3030:80"
+    volumes:
+      - uploads:/var/uploads/
+    links:
+      - backend:backend
+
+  postgres:
+    restart: always
+    image: postgres:9.5
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/9.5/data/
+
+  tarantool:
+    restart: always
+    image: tarantool/tarantool:1.7.3
+    ports:
+      - "3301:3301"
+    env_file: env
+
+  centrifugo:
+    restart: always
+    image: centrifugo/centrifugo
+    ports:
+      - "8000:8000"
+    env_file: env
+
+volumes:
+  pgdata:
+  uploads:
