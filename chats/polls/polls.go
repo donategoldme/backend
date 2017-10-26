@@ -69,9 +69,9 @@ func (p *PoolOfPolls) Clear(userID uint) {
 }
 
 func (p *PoolOfPolls) NewPoll(pfj PollFromJson) *Poll {
-	answers := []Answer{}
-	for _, answer := range pfj.Answers {
-		answers = append(answers, Answer{answer, 0})
+	answers := make([]Answer, len(pfj.Answers))
+	for i, answer := range pfj.Answers {
+		answers[i] = Answer{answer, 0}
 	}
 	poll := &Poll{Question: pfj.Question, Answers: answers, Count: 0, Voters: map[string]bool{}}
 	p.Polls[pfj.UserID] = poll
