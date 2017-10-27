@@ -31,5 +31,5 @@ Run scripts
 ## Depends
 - [iris](https://github.com/kataras/iris)
 - [gorm](https://github.com/jinzhu/gorm)
-- [tarantool](github.com/tarantool/go-tarantool)
-- [centrifugo](github.com/centrifugal/gocent)
+- [tarantool](https://github.com/tarantool/go-tarantool)
+- [centrifugo](https://github.com/centrifugal/gocent)
